@@ -1,0 +1,30 @@
+<apex:page controller="TaskController">
+
+        <apex:slds />    
+    <apex:form >
+        <apex:pageBlock title="Products List" id="products_list" >
+            
+            <!-- Products List -->
+			<apex:pageBlockTable value="{! products }" var="pd">
+            
+                <apex:column headerValue="IMAGE" width="13%" >
+                    <apex:image url="{!pd.Image_Url__c}" style="height:150px" styleClass="slds-align_absolute-center"/>
+                </apex:column>   
+                
+                <apex:column width="10%" styleClass="slds-p-around_medium">
+                    <a href="/apex/DetailPage?id={!pd.Id}" target="_blank"> {!pd.Name}</a>
+                </apex:column>
+            
+                <apex:column headerValue="DESCRIPTION" styleClass="slds-p-around_medium" width="65%"> {!LEFT(pd.Product_Description__c, 100)} 
+                    <a href="/apex/DetailPage?id={!pd.Id}" target="_blank">{!IF(LEN(pd.Product_Description__c) < 100 ,"","More")}</a>
+                </apex:column>
+            
+                <apex:column width="5%" headerValue="COST" value="{! pd.Unit_Price__c }"/>
+                
+                <apex:column width="5%">
+                    <button class="slds-button slds-button_brand slds-align_absolute-center"><a href="/apex/BuyPage?id={!pd.Id}">Buy</a></button>
+                </apex:column>
+			</apex:pageBlockTable>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>
