@@ -1,0 +1,108 @@
+<apex:page controller="BuyPageController" docType="html-5.0">
+    <html xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" lang="en">
+<apex:slds />
+    <apex:form >
+            <apex:actionFunction name="setAmount" action="{!setAmount}" reRender="total_amount">
+                <apex:param value="" name="amount"/>
+            </apex:actionFunction>
+        </apex:form>       
+        <script>
+            function calculateTotalAmount(count, unitPrice) {
+                if(count <= 0) {
+                    count = 0;
+                }
+                var calculation = unitPrice * count;
+                setAmount(calculation);
+            }   
+
+        </script>  
+    <apex:outputPanel layout="block" rendered="{!showInfo}" styleClass="slds-m-vertical_small">
+            <div class="slds-notify slds-notify_alert slds-theme_alert-texture slds-theme_{!typeMsg}" role="alert">
+                <span class="slds-assistive-text">{!typeMsg}</span>
+                <h2>{!detailMsg}</h2>
+            </div>
+        </apex:outputPanel>
+<apex:form >
+    
+    <div class="slds-scope">
+                
+                    <div class="slds-grid slds-card slds-has-bottom-magnet slds-box slds-theme_shade">
+                        <div class="slds-col slds-size_1-of-2 slds-text-heading_large slds-align_absolute-center slds-m-vertical_large">Contact Information</div>
+                        <div class="slds-col slds-size_1-of-2 slds-text-heading_large slds-align_absolute-center slds-m-vertical_large">Product Information</div>
+                    </div>
+                    <div class="slds-grid slds-card slds-has-top-magnet slds-has-bottom-magnet">
+                        <div class="slds-col slds-size_1-of-12"></div>
+                        <apex:actionRegion >
+                            <div class="slds-col slds-size_1-of-3 slds-m-vertical_large">
+                                <div class="slds-form slds-form_horizontal">
+                                    <div class="slds-form-element slds-m-bottom_medium">
+                                        <label class="slds-form-element__label slds-text-body_regular" for="contact-email">Email</label>
+                                        <div class="slds-form-element__control">
+                                            <apex:inputField value="{!Contact.Email}" required="true" styleClass="slds-input slds-size_small" id="contact-email"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="slds-form slds-form_horizontal">
+                                    <div class="slds-form-element slds-m-bottom_medium">
+                                        <label class="slds-form-element__label slds-text-body_regular" for="contact-first_name">First Name</label>
+                                        <div class="slds-form-element__control">
+                                            <apex:inputField value="{!Contact.FirstName}" styleClass="slds-input slds-size_small" id="contact-first_name"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="slds-form slds-form_horizontal">
+                                    <div class="slds-form-element slds-m-bottom_medium">
+                                        <label class="slds-form-element__label slds-text-heading_small" for="contact-last_name">Last Name<abbr class="slds-required" title="required">*</abbr></label>
+                                        <div class="slds-form-element__control">
+                                            <apex:inputField value="{!Contact.LastName}" required="true" styleClass="slds-input slds-size_small" id="contact-last_name"/>
+                                        </div>
+                                    </div>
+                                </div>                
+                            </div>
+                        </apex:actionRegion>
+                        <div class="slds-col slds-size_1-of-6"></div>
+                        <div class="slds-col slds-size_1-of-3 slds-m-vertical_large">
+                            <div class="slds-form slds-form_horizontal">
+                                <div class="slds-form-element slds-m-bottom_medium">
+                                    <label class="slds-form-element__label slds-text-body_regular">Product Name</label>
+                                    <div class="slds-form-element__control">
+                                        <span class="slds-text-body_regular">{!pt.Name}</span>
+                                    </div>
+                                </div>
+                                <div class="slds-form-element slds-m-bottom_medium">
+                                    <label class="slds-form-element__label slds-text-body_regular">Cost</label>
+                                    <div class="slds-form-element__control">
+                                        <span class="slds-text-body_regular" id="unit_cost">{!pt.Unit_Price__c} $</span>
+                                    </div>
+                                </div>
+                                <apex:actionRegion >
+                                    <div class="slds-form-element slds-m-bottom_medium">
+                                        <label class="slds-form-element__label slds-text-body_regular" for="unit_count">Unit Count</label>
+                                        <div class="slds-form-element__control">
+                                                <apex:input type="number" required="true" styleClass="slds-input slds-size_small" value="{!count}" onchange="calculateTotalAmount(this.value,'{!pt.Unit_Price__c}')" id="unit_count"/>
+                                        </div>
+                                    </div>
+                                </apex:actionRegion>
+                                <div class="slds-form-element slds-m-bottom_medium">
+                                    <label class="slds-form-element__label slds-text-body_regular">Total Amount</label>
+                                    <div class="slds-form-element__control">
+                                        <apex:outputPanel styleClass="slds-text-body_regular" id="total_amount">{!totalAmount}</apex:outputPanel>
+                                        <span class="slds-text-body_regular">&nbsp;$</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    
+                
+            </div>       
+    <div class="slds-grid slds-gutters slds-box slds-theme_shade">
+            <div class="slds-col slds-size_1-of-2">
+                <button class="slds-button slds-button_neutral slds-float_right"><a href="/apex/TaskPage" target="_blank">To Shopping</a></button></div>
+        	<apex:commandButton value="Buy" action="{!deal}" styleClass="slds-button slds-button_brand"/>
+                </div>
+    
+    </apex:form>
+      </html>
+</apex:page>
