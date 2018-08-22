@@ -1,0 +1,31 @@
+<apex:page controller="DetailPageController">
+<apex:slds />
+    
+			<apex:repeat value="{! product }" var="pd">
+                <div class="slds-align_absolute-center slds-box slds-theme_shade" style="height: 5rem;">
+                    <div class="slds-text-heading_large">{!pd.Name}</div>
+                </div>
+                <div class="slds-grid slds-gutters">
+                  <div class="slds-col slds-size_1-of-2">
+                    <apex:image url="{!pd.Image_Url__c}" style="height:400px" styleClass="slds-align_absolute-center"/>
+                  </div>
+                  <div class="slds-col slds-size_1-of-2">
+                      <ul>
+                          <li> <h2><div class="slds-text-color_weak slds-m-top_medium">AMOUNT:</div></h2>
+                            {!pd.Units_Available__c}</li>
+                          
+                          <li><div class="slds-text-color_weak slds-m-top_medium">DESCRIPTION:</div>
+                              {!pd.Product_Description__c}</li>  
+                      </ul>
+                  </div>
+                </div>
+                <div class="slds-grid slds-gutters slds-box slds-theme_shade">
+                  <div class="slds-col slds-size_1-of-2">
+                <button class="slds-button slds-button_neutral slds-float_right"><a href="/apex/TaskPage" target="_blank">To Shopping</a></button></div>
+                      <div class="slds-col slds-size_1-of-2">
+                          <button class="slds-button slds-button_brand slds-float_left"><a href="/apex/BuyPage?id={!pd.Id}">Buy</a></button>
+              </div>
+                </div>
+			</apex:repeat>
+      
+</apex:page>
