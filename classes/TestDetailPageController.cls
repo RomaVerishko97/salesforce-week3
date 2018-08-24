@@ -18,5 +18,6 @@ private class TestDetailPageController {
         insert pt;
         DetailPageController dpc = new DetailPageController();
         dpc.getProduct();
+        System.assert(dpc.getProduct() != null);
     }
 }
