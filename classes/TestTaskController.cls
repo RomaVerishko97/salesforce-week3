@@ -32,5 +32,6 @@
         insert pt;
         TaskController tc = new TaskController();
         tc.getProducts();
+	System.assert(tc.getProducts() != null);
     }
 }
