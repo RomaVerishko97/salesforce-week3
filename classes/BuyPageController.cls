@@ -5,7 +5,7 @@ public class BuyPageController {
     public String detailMsg {get; set;}
     public String typeMsg {get; set;}
     public Integer count{get; set;}
-    public Integer totalAmount{get; set;}
+    public Double totalAmount{get; set;}
     
     public BuyPageController(){
         
