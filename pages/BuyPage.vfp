@@ -7,15 +7,22 @@
             </apex:actionFunction>
         </apex:form>       
         <script>
+        
             function calculateTotalAmount(count, unitPrice) {
                 if(count <= 0) {
                     count = 0;
                 }
                 var calculation = unitPrice * count;
                 setAmount(calculation);
+        
             }   
-
-        </script>  
+				if(window.onload) {
+                    var element = document.getElementById('{!$Component.unit_count}');
+                    element.onkeyup();
+				}
+			
+        </script> 
+        
     <apex:outputPanel layout="block" rendered="{!showInfo}" styleClass="slds-m-vertical_small">
             <div class="slds-notify slds-notify_alert slds-theme_alert-texture slds-theme_{!typeMsg}" role="alert">
                 <span class="slds-assistive-text">{!typeMsg}</span>
@@ -79,7 +86,7 @@
                                     <div class="slds-form-element slds-m-bottom_medium">
                                         <label class="slds-form-element__label slds-text-body_regular" for="unit_count">Unit Count</label>
                                         <div class="slds-form-element__control">
-                                                <apex:input type="number" required="true" styleClass="slds-input slds-size_small" value="{!count}" onchange="calculateTotalAmount(this.value,'{!pt.Unit_Price__c}')" id="unit_count"/>
+                                            <apex:input type="number" required="true" styleClass="slds-input slds-size_small" value="{!count}" onchange="calculateTotalAmount(this.value,'{!pt.Unit_Price__c}')" onkeyup="calculateTotalAmount(this.value,'{!pt.Unit_Price__c}')" id="unit_count"/>
                                         </div>
                                     </div>
                                 </apex:actionRegion>
